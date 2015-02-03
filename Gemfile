@@ -41,3 +41,5 @@ gem 'spring',        group: :development
 gem 'semantic-ui-rails'
 gem 'less-rails'
 gem 'autoprefixer-rails'
+
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass', branch: 'v1.0beta'
