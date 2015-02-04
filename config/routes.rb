@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root "events#home"
 
+  get '/null' => "events#nullimage"
+
   resources :events
 
 

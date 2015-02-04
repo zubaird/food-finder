@@ -7,9 +7,33 @@ html, body, #map-canvas {
 </style>
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
-<h1>Events</h1>
 
-<input type="text_field" name="some_name" value="" id="search-events">
-<input type="submit" name="some_name" value="Search" id="submit">
 
-<div id="events"></div>
+<h1 class="center aligned page grid">Free Food Event Finder!</h1>
+<h1 class="fourteen wide column">Enter Your City:</h1>
+
+<div class="ui stackable center aligned page grid four cards">
+  <div class="fourteen wide column">
+    <input class="seven wide column" type="text_field" name="some_name" value="" id="search-events">
+
+    Within: <div class="ui compact selection dropdown">
+      <i class="dropdown icon"></i>
+      <div class="text">1</div>
+      <div class="menu">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">4</div>
+        <div class="item">6</div>
+        <div class="item">8</div>
+        <div class="item">10</div>
+        <div class="item">12</div>
+        <div class="item">18</div>
+        <div class="item">25</div>
+      </div>
+    </div> Miles
+    <input class="seven wide column" type="submit" name="some_name" value="Search" id="submit">
+  </div>
+
+  <h1 class="fourteen wide column">(log in)</h1>
+  <div class="fourteen wide column" id="events"></div>
+</div>
