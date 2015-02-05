@@ -15,11 +15,105 @@ function loadMap(long,lat,eventIndex){
 
 function init(){
 
+
+
+$("div#signup").on("click", function(){
+  var inputUsername = $("input#username").val();
+  var inputEmail = $("input#email").val();
+  var inputPassword = $("input#password").val();
+  var inputPasswordConfirm = $("input#password_confirm").val();
+
+  $.ajax({
+    url: "users",
+    type: "post",
+    data: {
+      users:{
+        username:inputUsername,
+        email: inputEmail,
+        password: inputPassword,
+        password_confirmation: inputPasswordConfirm
+      }
+    }
+  }).done(function(data){
+    console.log(data);
+  });
+});
+
+$("div#signin").on("click", function(){
+  var inputUsername = $("input#username_signin").val();
+  var inputPassword = $("input#password_signin").val();
+
+  $.ajax({
+    url: "signin", //session controller
+    type: "post", //new session
+    data: {
+      users:{
+        username: inputUsername,
+        password: inputPassword,
+      }
+    }
+  }).done(function(data){
+    console.log(data);
+    $('.ui.modal').modal("hide");
+    $("h1#signin").html("");
+    $("h1#signin").append(" Welcome " + data.username + " | ");
+    $("h1#signin").append("<a href='#' id='signoutlink' data-id='"+ data.id + "'> Sign Out</a>");
+    var userDetails = $("div#user-details");
+    addNewEventFormTo(userDetails);
+  });
+});
+
+
+function addNewEventFormTo(element){
+   var newEventForm = "\
+  <div class='left floated right aligned six wide column'>\
+    <div class='ui form six wide column'>\
+      <div class='ui left aligned segment'>\
+        <label>Event Name</label>\
+        <input type='text' id='userEventName'>\
+        <label>Venue</label>\
+        <input type='text' id='userEventVenue'>\
+        <label>Start Date/Time</label>\
+        <input type='text' id='userEventTime'>\
+        <label>Image URL</label>\
+        <input type='text' id='userEventImageUrl'>\
+        <label>Event Link</label>\
+        <input type='text' id='userEventLink'>\
+        <div class='ui submit button' id='signup'>Add new event</div>\
+      </div>\
+    </div>\
+  </div>\
+  ";
+  element.append(newEventForm);
+  return newEventForm;
+}
+
+
+$("h1#signin").on("click", "a#signoutlink",function(){
+  $.ajax({
+    url: "/signout",
+    type: "delete",
+    data: {
+      users:{
+        id: $(this).data("id")
+      }
+    }
+  }).done(function(data){
+    $("h1#signin").html("");
+    $("h1#signin").append("<h4 class='fourteen wide column' id='signin'><a href='#' id='signinlink'>(log in)</a></h4>");
+  });
+});
+
+
 var url = "https://www.eventbriteapi.com/v3/events/search/";
 var token = "&token=C77FKQUHP7G7SL7C7NA7";
 
 $('.dropdown').dropdown({
   transition: 'drop'
+});
+
+$("a#signinlink").on("click", function(){
+  $('.ui.modal').modal("show");
 });
 
 $("input#submit").on("click", function(){
@@ -39,6 +133,7 @@ $("input#submit").on("click", function(){
   }).done(function(data){
     console.log(data);
     for (var i = 0; i < data.events.length; i++) {
+
       if (data.events[i].description !== null ) {
         if (data.events[i].description.text != null) {
           var food = data.events[i].description.text.match(foodCheck);
@@ -48,8 +143,14 @@ $("input#submit").on("click", function(){
           var food = null;
           var eventDescription = "no description";
         }
+        if (data.events[i].ticket_classes[0] != null) {
+          var free = data.events[i].ticket_classes[0].free;
+        }else{
+          var free = false;
+        }
+
       }
-      var free = data.events[i].ticket_classes[0].free;
+
       console.log(data.events[i].url);
 
       if (data.events[i] != null && data.events[i].logo_url != null) {
@@ -71,7 +172,6 @@ $("input#submit").on("click", function(){
       }else{
         var eventName = "Event Name not found";
       }
-
       var listItem =     '<div class="ui fluid card">\
                             <a href="' + data.events[i].url + '">\
                               <div class="image">\
@@ -102,7 +202,6 @@ $("input#submit").on("click", function(){
       $("div#event-list").append("<h1>No results</h1>");
     }
   });
-
 });
 }
 

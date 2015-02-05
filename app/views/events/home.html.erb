@@ -9,31 +9,95 @@ html, body, #map-canvas {
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
 
 
-<h1 class="center aligned page grid">Free Food Event Finder!</h1>
-<h1 class="fourteen wide column">Enter Your City:</h1>
+
+<div class="ui two column centered grid">
+  <div class="column"></div>
+  <div class="four column centered row">
+    <div class="column">
+      <div class="ui inverted circular segment">
+        <h2 class="ui inverted header">
+          Find Free Events /w Food!
+          <div class="sub header">Enter an address.</div>
+        </h2>
+      </div>
+    </div>
+    <div class="column">
+
+    </div>
+  </div>
+</div>
 
 <div class="ui stackable center aligned page grid four cards">
   <div class="fourteen wide column">
     <input class="seven wide column" type="text_field" name="some_name" value="" id="search-events">
-
     Within: <div class="ui compact selection dropdown">
       <i class="dropdown icon"></i>
       <div class="text">1</div>
       <div class="menu">
         <div class="item">1</div>
         <div class="item">2</div>
+        <div class="item">3</div>
         <div class="item">4</div>
+        <div class="item">5</div>
         <div class="item">6</div>
+        <div class="item">7</div>
         <div class="item">8</div>
-        <div class="item">10</div>
-        <div class="item">12</div>
-        <div class="item">18</div>
-        <div class="item">25</div>
+        <div class="item">9</div>
       </div>
     </div> Miles
     <input class="seven wide column" type="submit" name="some_name" value="Search" id="submit">
   </div>
 
-  <h1 class="fourteen wide column">(log in)</h1>
+  <h1 class="fourteen wide column" id="signin"><a href="#" id="signinlink">(log in)</a></h1>
+  <div class="fourteen wide column" id="user-details">
+
+  </div>
   <div class="fourteen wide column" id="events"></div>
+</div>
+
+<div class="ui modal">
+  <i class="close icon"></i>
+  <h4 class="ui dividing header">Sign In</h4>
+  <form class="ui form">
+    <br>
+    <div class="two fields">
+      <div class="field">
+        <label>Username:</label>
+        <div class="field">
+          <input type="text" name="username" placeholder="Username" id="username_signin">
+        </div>
+        <label>Password:</label>
+        <div class="field">
+          <input type="password" name="password" placeholder="Password" id="password_signin">
+        </div>
+      </div>
+    </div>
+    <div class="ui submit button" id="signin">Sign in</div>
+  </form>
+
+  <h4 class="ui dividing header">...Or Create A New Account</h4>
+  <form class="ui form">
+    <br>
+  <div class="two fields">
+    <div class="field">
+        <label>Username:</label>
+        <div class="field">
+          <input type="text" name="username" placeholder="Username" id="username">
+        </div>
+        <label>E-mail:</label>
+        <div class="field">
+          <input type="text" name="email" placeholder="Valid e-mail" id="email"  >
+        </div>
+        <label>Password:</label>
+        <div class="field">
+          <input type="password" name="password" placeholder="Password" id="password">
+        </div>
+        <label>Password confirmation:</label>
+        <div class="field">
+          <input type="password" name="password_confirmation" placeholder="Please confirm password"  id="password_confirm">
+        </div>
+    </div>
+  </div>
+  <div class="ui submit button" id="signup">Sign up</div>
+</form>
 </div>
